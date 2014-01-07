@@ -1,6 +1,6 @@
 bin
 obj
-**/packages/*
+**/packages/**
 NuGet/lib/*
 [Rr]elease*/
 _ReSharper*/
