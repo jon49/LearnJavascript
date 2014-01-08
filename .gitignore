@@ -16,8 +16,5 @@ _ReSharper*/
 :
 nugetpackage/lib
 build
-
-# Generated documentation
-Docs/output/*
-TestResults/FunScript.TE.Tests.mdf
-TestResults/FunScript.TE.Tests_log.ldf
+*.dll
+*!sync
