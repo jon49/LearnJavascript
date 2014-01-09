@@ -2,17 +2,24 @@ namespace FStoJS_Static
 
 open IntelliFactory.WebSharper
 open IntelliFactory.WebSharper.Html
+type private Math = System.Math
 
 [<JavaScript>]
 module Client =
 
+    let msg messages = messages |> String.concat " - "
+    let alert message = JavaScript.Alert(message)
+
     let Main () =
-        let input = Input [Text ""]
         let label = Div [Text ""]
+
         Div [
-            input
             label
-            Button [Text "Click"]
+            Button [Text "Start Javascript."]    
             |>! OnClick (fun _ _ ->
-                label.Text <- "You entered: " + input.Value)
+                let text m = label.Text <- m
+                label.Text <- "You entered: "
+                text (string (Math.Min(1, 2)))
+                Math.Max(2, 3) |> string |> alert 
+                )
         ]
