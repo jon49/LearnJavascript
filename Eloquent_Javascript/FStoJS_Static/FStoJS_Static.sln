@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FStoJS_Static", "FStoJS_Static\FStoJS_Static.fsproj", "{BDFC6037-2874-4549-B393-1CEFA2B30ACF}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FStoJS", "FStoJS_Static\FStoJS.fsproj", "{BDFC6037-2874-4549-B393-1CEFA2B30ACF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -18,3 +18,5 @@ nugetpackage/lib
 build
 *.dll
 *!sync
+*.swp
+packages

@@ -1,4 +1,4 @@
-namespace FStoJS_Static
+namespace EJ 
 
 open IntelliFactory.Html
 open IntelliFactory.WebSharper
