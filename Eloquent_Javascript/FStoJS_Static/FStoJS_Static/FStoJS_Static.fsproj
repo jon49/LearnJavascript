@@ -34,6 +34,7 @@
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Utilities.fs" />
     <Compile Include="Client.fs" />
     <Compile Include="Main.fs" />
     <None Include="extra.files" />
