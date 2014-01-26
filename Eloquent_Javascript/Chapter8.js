@@ -104,15 +104,6 @@ function Terrarium(plan) {
     }
   this.grid = grid;
 }
-
-function elementFromCharacter(character) {
-  if (character == " ")
-    return undefined;
-  else if (character == "#")
-    return wall;
-  else if (character == "o")
-    return new StupidBug();
-}
 wall.character = "#";
 StupidBug.prototype.character = "o";
 
@@ -140,12 +131,91 @@ function bindMethod(method, object){
         return object[method].apply(object, arguments);
     };
 }
-
-
-
-
-
-
+//
+Terrarium.prototype.listActingCreatures = function() {
+  var found = [];
+  this.grid.each(function(point, value) {
+      if (value !== undefined && value.act)
+        found.push({object: value, point: point});
+    });
+  return found;
+};
+// Ex. 8.5
+Terrarium.prototype.listSurroundings = function(center){
+    var arroundCenter = {};
+    var grid = this.grid;
+    function surroundings(point, value){
+        var byCenter = center.add(point);
+        if (grid.isInside(byCenter))
+            arroundCenter[point] = (characterFromElement(byCenter));
+        else
+            arroundCenter[point] = "#";
+    }
+    directions.each(surroundings);
+    return arroundCenter;
+};
+//
+Terrarium.prototype.processCreature = function(creature) {
+  var surroundings = this.listSurroundings(creature.point);
+  var action = creature.object.act(surroundings);
+  if (action.type == "move" && directions.contains(action.direction)) {
+      var to = creature.point.add(directions.lookup(action.direction));
+      if (this.grid.isInside(to) && this.grid.valueAt(to) === undefined)
+        this.grid.moveValue(creature.point, to);
+    }
+  else {
+      throw new Error("Unsupported action: " + action.type);
+    }
+};
+Terrarium.prototype.step = function() {
+  forEach(this.listActingCreatures(),
+          bind(this.processCreature, this));
+  if (this.onStep)
+    this.onStep();
+};
+Terrarium.prototype.start = function() {
+  if (!this.running)
+    this.running = setInterval(bind(this.step, this), 500);
+};
+Terrarium.prototype.stop = function() {
+  if (this.running) {
+    clearInterval(this.running);
+    this.running = null;
+  }
+};
+var creatureTypes = new Dictionary();
+creatureTypes.register = function(constructor) {
+  this.store(constructor.prototype.character, constructor);
+};
+function elementFromCharacter(character) {
+  if (character == " ")
+    return undefined;
+  else if (character == "#")
+    return wall;
+  else if (creatureTypes.contains(character))
+    return new (creatureTypes.lookup(character))();
+  else
+    throw new Error("Unknown character: " + character);
+}
+function BouncingBug() {
+  this.direction = "ne";
+}
+BouncingBug.prototype.act = function(surroundings) {
+  if (surroundings[this.direction] != " ")
+    this.direction = (this.direction == "ne" ? "sw" : "ne");
+  return {type: "move", direction: this.direction};
+};
+BouncingBug.prototype.character = "%";
+creatureTypes.register(BouncingBug);
+// Ex. 8.6
+function DrunkBug(){}
+DrunkBug.prototype.act = function(surroundings){
+    var randomDirection = surroundings[Math.floor(Math.random()*surroundings*(surroundings.length - 1))];
+    return {type: "move", direction: randomDirection};
+};
+var terrarium = new Terrarium(thePlan);
+terrarium.onStep = partial(inPlacePrinter(), terrarium);
+terrarium.start();
 
 
 
