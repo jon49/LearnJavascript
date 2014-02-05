@@ -2,7 +2,7 @@
 
 #### Chapter 2
 
-- [Mind Map](https://rawgithub.com/jon49/LearnJavascript/master/Functional_JavaScript/Chapter2.html)
+- [Mind Map of Function Interpose](https://rawgithub.com/jon49/LearnJavascript/master/Functional_JavaScript/Chapter2.html)
 - [Fiddle](http://jsfiddle.net/jon49/9ZXkY/1/)
   - Why is `construct` needed in `project`????
     - Possibly to just show the concept of `Applicative` programming?
