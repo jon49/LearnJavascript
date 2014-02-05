@@ -6,3 +6,7 @@
 - [Fiddle](http://jsfiddle.net/jon49/9ZXkY/1/)
   - Why is `construct` needed in `project`????
     - Possibly to just show the concept of `Applicative` programming?
+
+#### Chapter 3
+
+- [Difference between `Partial Application`, `Closure`, and `Currying`](http://robpatro.com/blog/?p=53)
